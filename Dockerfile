@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Use an official OpenJDK runtime as a parent image
 FROM openjdk:17-jdk-slim as builder
 
@@ -31,3 +32,9 @@ EXPOSE 8080
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "demo.jar"]
+=======
+FROM openjdk:17
+EXPOSE 8080
+ADD target/demo-0.0.1-SNAPSHOT.jar demo-0.0.1-SNAPSHOT.jar
+ENTRYPOINT  ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
+>>>>>>> test
