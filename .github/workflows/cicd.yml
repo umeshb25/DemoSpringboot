@@ -1,0 +1,17 @@
+name: SpringBoot CI/CD 
+
+on:
+  push:
+    branches:
+      - main # Adjust this to your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Docker container
+        run: sudo docker-compose up -d
