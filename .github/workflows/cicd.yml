@@ -20,11 +20,11 @@ jobs:
       #     sudo systemctl start docker
       #     sudo systemctl enable docker
       - name: Run Docker version
-        run: sudo docker --version
+        run: docker --version
 
 
       - name: Run Docker Compose version
-        run: sudo docker-compose --version
+        run: docker-compose --version
 
         
       - name: Install Docker Compose
