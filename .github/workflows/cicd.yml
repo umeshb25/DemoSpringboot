@@ -24,7 +24,7 @@ jobs:
 
 
       - name: Run Docker Compose version
-        run: docker-compose --version
+        run: docker compose --version
 
         
       - name: Install Docker Compose
