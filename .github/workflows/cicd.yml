@@ -19,7 +19,14 @@ jobs:
       #     sudo apt-get install -y docker.io
       #     sudo systemctl start docker
       #     sudo systemctl enable docker
+      - name: Run Docker version
+        run: sudo docker --version
 
+
+      - name: Run Docker Compose version
+        run: sudo docker-compose --version
+
+        
       - name: Install Docker Compose
         run: |
           sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
