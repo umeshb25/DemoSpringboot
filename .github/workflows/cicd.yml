@@ -38,3 +38,9 @@ jobs:
       - name: Build docker command  
         run: sudo docker-compose up --build -d
         # run: sudo docker-compose up -d
+      - name: Wait for containers to initialize (optional)
+        run: sleep 30 # Allow time for the containers to start up (optional)
+
+      - name: Check logs for Spring Boot container
+        run: sudo docker-compose logs springboot-app # Capture logs from the Spring Boot container
+
