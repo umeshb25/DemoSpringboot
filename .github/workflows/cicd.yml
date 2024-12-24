@@ -33,7 +33,7 @@ jobs:
           sudo chmod +x /usr/local/bin/docker-compose
 
       - name: Copy .env_sample to .env
-        run: cp ./.env_sample ./.env 
+        run: cp ./.env_sample /home/nikhil/Documents/DrKare/actions-runner-demodrkare/_work/DemoSpringboot/DemoSpringboot/.env 
 
       - name: Down Docker container
         run:  docker-compose down
