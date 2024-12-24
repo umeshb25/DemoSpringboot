@@ -51,11 +51,11 @@ jobs:
       # - name: Start Docker containers
       #   run: sudo docker-compose up -d
 
-      - name: Wait for containers to initialize (optional)
-        run: sleep 30
+      # - name: Wait for containers to initialize (optional)
+      #   run: sleep 30
       
       - name: Build Docker containers
         run: docker compose up --build -d
 
       - name: Check logs for Spring Boot container
-        run: docker-compose logs springboot-app
+        run: docker compose logs springboot-app
