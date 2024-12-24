@@ -55,7 +55,7 @@ jobs:
         run: sleep 30
       
       - name: Build Docker containers
-        run: docker-compose up --build -d
+        run: docker compose up --build -d
 
       - name: Check logs for Spring Boot container
         run: docker-compose logs springboot-app
