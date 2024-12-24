@@ -1,12 +1,10 @@
-version: '3.8'
-
 services:
   # PostgreSQL Database Service
   postgres-db:
     image: postgres:latest
     container_name: postgres-db
     env_file:
-      -.env
+      - .env
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -27,7 +25,7 @@ services:
     ports:
       - "8080:8080" # Expose Spring Boot app port
     env_file:
-      -.env
+      - .env
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
@@ -39,7 +37,7 @@ services:
 
 networks:
   drkare_test_network:
-    external: true
+    driver: bridge
 
 volumes:
   postgres-data:
