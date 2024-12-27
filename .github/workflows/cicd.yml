@@ -1,9 +1,9 @@
-name: SpringBoot CI/CD 
+name: SpringBoot CI/CD
 
 on:
   push:
     branches:
-      - main # Adjust this to your main branch name
+      - main
 
 jobs:
   build:
@@ -13,34 +13,55 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Uncomment and configure if Docker setup is needed
       # - name: Set up Docker
       #   run: |
       #     sudo apt-get update
       #     sudo apt-get install -y docker.io
       #     sudo systemctl start docker
       #     sudo systemctl enable docker
+
       - name: Run Docker version
         run: docker --version
-
 
       - name: Run Docker Compose version
         run: docker compose --version
 
-        
       - name: Install Docker Compose
         run: |
           sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
 
-      - name: down Docker container
-        run: sudo docker-compose down
+      - name: Copy .env_sample to .env
+        run: cp ./.env_sample ./.env
 
-      - name: Build docker command  
-        run: sudo docker-compose up --build -d
-        # run: sudo docker-compose up -d
-      - name: Wait for containers to initialize (optional)
-        run: sleep 30 # Allow time for the containers to start up (optional)
+      - name: Down Docker container
+        run:  docker-compose down
+
+      - name: Build Docker containers
+        run:  docker-compose up --build -d
+
+  deploy:
+    needs: build
+    runs-on: [self-hosted, demodrkare]
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Uncomment if deployment requires starting containers
+      # - name: Start Docker containers
+      #   run: sudo docker-compose up -d
+
+      # - name: Wait for containers to initialize (optional)
+      #   run: sleep 30
+
+      - name: Copy .env_sample to .env
+        run: cp ./.env_sample /home/nikhil/Documents/DrKare/actions-runner-demodrkare/_work/DemoSpringboot/DemoSpringboot/.env 
+      
+      - name: Build Docker containers
+        run: docker compose up --build -d
 
       - name: Check logs for Spring Boot container
-        run: sudo docker-compose logs springboot-app # Capture logs from the Spring Boot container
-
+        run: docker compose logs springboot-app
