@@ -32,7 +32,6 @@ public class StudentController {
 	        return ResponseEntity.ok(savedStudent);
 	    }
 
-	   
 	    @GetMapping
 	    public ResponseEntity<List<Student>> getAllStudents() {
 	        List<Student> students = studentservice.getAllStudents();
