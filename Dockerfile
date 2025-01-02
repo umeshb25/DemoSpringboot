@@ -28,7 +28,7 @@ WORKDIR /app
 COPY --from=builder /app/target/demo-0.0.1-SNAPSHOT.jar /app/demo.jar
 
 # Expose the port the app will run on (default Spring Boot port is 8080)
-EXPOSE 8090
+EXPOSE 8080
 
 # Run the application
 ENTRYPOINT ["java", "-jar", "demo.jar"]
